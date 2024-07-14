@@ -12,6 +12,13 @@ class AssortmentQuality {
   #maxQuality = 50;
   #minQuality = 0;
   #sellInThreshold = 0;
+  #assortment = {
+    commonProduct: "common product",
+    agedBrie: "aged brie",
+    sulfuras: "sulfuras",
+    backstagePases: "backstage passes",
+    conjured: "conjured",
+  }
 
   #getCommonProductQuaity(quality, sellIn) {
     const dayQualityChange = sellIn < this.#sellInThreshold
@@ -69,23 +76,23 @@ class AssortmentQuality {
   }
 
   #assortmentInterface = {
-    "common product": this.#getCommonProductQuaity.bind(this),
-    "aged brie": this.#getAgedBrieQuality.bind(this),
-    "sulfuras": this.#getSulfurasQuality.bind(this),
-    "backstage passes": this.#getBackstagePassesQuality.bind(this),
-    "conjured": this.#getConjuredQuality.bind(this),
+    [this.#assortment.commonProduct]: this.#getCommonProductQuaity.bind(this),
+    [this.#assortment.agedBrie]: this.#getAgedBrieQuality.bind(this),
+    [this.#assortment.sulfuras]: this.#getSulfurasQuality.bind(this),
+    [this.#assortment.backstagePases]: this.#getBackstagePassesQuality.bind(this),
+    [this.#assortment.conjured]: this.#getConjuredQuality.bind(this),
   }
 
   getProductQuality({ name, sellIn, quality }) {
     if (quality < this.#minQuality) return quality;
-    const commonProduct = "common product";
+
 
     for (const [product, getQuality] of Object.entries(this.#assortmentInterface)) {
       if (name.toLowerCase().includes(product)) {
         return getQuality(quality, sellIn);
       }
     }
-    return this.#assortmentInterface[commonProduct](quality, sellIn);
+    return this.#assortmentInterface[this.#assortment.commonProduct](quality, sellIn);
   }
 }
 
@@ -109,4 +116,4 @@ class Shop {
 }
 
 
-module.exports = {Item, Shop};
+module.exports = { Item, Shop };
