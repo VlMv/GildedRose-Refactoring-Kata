@@ -86,7 +86,6 @@ class AssortmentQuality {
   getProductQuality({ name, sellIn, quality }) {
     if (quality < this.#minQuality) return quality;
 
-
     for (const [product, getQuality] of Object.entries(this.#assortmentInterface)) {
       if (name.toLowerCase().includes(product)) {
         return getQuality(quality, sellIn);
