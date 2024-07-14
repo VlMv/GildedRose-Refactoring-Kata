@@ -2,7 +2,7 @@
 
 --
 
-Мой варинат тренировки рефакторинга и тестирования Gilded Rose Refactoring Kata
+Мой вариант тренировки рефакторинга и тестирования Gilded Rose Refactoring Kata
 
 --
 
