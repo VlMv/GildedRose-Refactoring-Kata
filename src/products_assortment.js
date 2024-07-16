@@ -11,7 +11,7 @@ class CommonProduct {
     return this._productType;
   }
 
-  getQuality(quality, sellIn) {
+  _getQuality(quality, sellIn) {
     const dayQualityChange = sellIn < this._sellInThreshold
       ? this._dayQualityChange * 2
       : this._dayQualityChange;
@@ -21,6 +21,10 @@ class CommonProduct {
       ? this._minQuality
       : productQuality;
   }
+
+  get getQuality() {
+    return (quality, sellIn) => this._getQuality(quality, sellIn)
+  }
 }
 
 class AgedBrie extends CommonProduct {
@@ -28,7 +32,7 @@ class AgedBrie extends CommonProduct {
     super();
     this._productType = "aged brie";
   }
-  getQuality(quality, sellIn) {
+  _getQuality(quality, sellIn) {
     return quality < this._maxQuality
       ? quality + this._dayQualityChange
       : this._maxQuality;
@@ -40,7 +44,7 @@ class Sulfuras extends CommonProduct {
     super();
     this._productType = "sulfuras";
   }
-  getQuality(quality, sellIn) {
+  _getQuality(quality, sellIn) {
     const sulfurasQuality = 80;
 
     return quality !== sulfurasQuality
@@ -54,7 +58,7 @@ class BackstagePases extends CommonProduct {
     super();
     this._productType = "backstage passes";
   }
-  getQuality(quality, sellIn) {
+  _getQuality(quality, sellIn) {
     const tenDayThreshold = 10;
     const fiveDayThreshold = 5;
     let dayQualityChange = this._dayQualityChange;
@@ -79,7 +83,7 @@ class Conjured extends CommonProduct {
     super();
     this._productType = "conjured";
   }
-  getQuality(quality, sellIn) {
+  _getQuality(quality, sellIn) {
     const dayQualityChange = sellIn < this._sellInThreshold
       ? this._dayQualityChange * 4
       : this._dayQualityChange * 2;
