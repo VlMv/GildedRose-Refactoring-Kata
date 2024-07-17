@@ -10,7 +10,7 @@ class AssortmentQuality {
   getProductQuality({ name, sellIn, quality }) {
     if (quality < 0) return quality;
 
-    for (const product of Object.values(this._products)) {
+    for (const product of this._products) {
       if (name.toLowerCase().includes(product.productType)) {
         return product.getQuality(quality, sellIn);
       }
